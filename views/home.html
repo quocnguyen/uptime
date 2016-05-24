@@ -1,0 +1,156 @@
+ <style type="text/css">
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    font: 17px/1.5 "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    background: white;
+    margin: 0;
+    color: #33333d;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: #33a0c0;
+  }
+
+  input {
+    padding: 10px;
+    width:400px;
+  }
+  button {
+    padding: 12px;
+    width: 400px;
+  }
+
+  section {
+    min-height: 50%;
+  }
+
+  section:not(:last-child) {
+    border-bottom: 1px solid #eee;
+  }
+
+  section:not(.top) {
+    padding: 150px 100px;
+    text-align: center;
+  }
+
+  pre {
+    background: white;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 25px;
+    font-size: .9em;
+    font-family: monospace;
+    overflow-x: auto;
+  }
+
+
+  p {
+    font-weight: 300;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+  }
+
+  code {
+    font-family: monospace;
+    font-size: .9em;
+  }
+
+  .content {
+    margin: 0 auto;
+    max-width: 750px;
+    text-align: left;
+  }
+
+  .top {
+    height: 100%;
+  }
+
+  .heading {
+    -webkit-user-select: none;
+    position: absolute;
+    top: 50%;
+    margin-top: -150px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .what-uptime-is-for {
+    color: #cb3837;
+  }
+
+  .result {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 700px) {
+    section:not(.top) {
+      padding: 50px 25px;
+    }
+    .heading {
+      margin-top: -75px;
+    }
+    .result {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    body {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<section id="top">
+  <div id="heading">
+    <div id="logo">
+      <h1>
+        Watch your websites while you
+        <span class="what-uptime-is-for"></span>
+      </h1>
+      <form method="post">
+          {{#csrfToken}}
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          {{/csrfToken}}
+          <div>
+            <input type="text" name="url" placeholder="Your site">
+          </div>
+          <div>
+            <input type="email" name="email" placeholder="Your email">
+          </div>
+
+          <button type="submit">
+            Watch
+          </button>
+      </form>
+    </div>
+
+      {{#msg}}
+      <div id="tabline">{{msg}}</div>
+      {{/msg}}
+  </div>
+</section>
+
+
+<script src="https://cdn.rawgit.com/yuanqing/malarkey/master/dist/malarkey.min.js"></script>
+<script type="text/javascript">
+'use strict';
+var elem = document.querySelector('.what-uptime-is-for');
+var agent = window.malarkey(elem, {
+  typeSpeed: 50,
+  deleteSpeed: 50,
+  pauseDelay: 2000,
+  loop: true,
+  postfix: '.'
+});
+['eat', 'sleep', 'f*ck', 'sh*t'].forEach(function(reason) {
+    agent.type(reason).pause().delete();
+});
+
+</script>
