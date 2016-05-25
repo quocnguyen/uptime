@@ -40,7 +40,7 @@ you can config your app using the environment variables in `.env` file.
 | ------------- | ------------- | ------------- |
 | PORT  | the port uptime will listen on  | 3001 |
 | DB  | folder where uptime store database  | ./db |
-| VIRTUAL_DOMAIN | your domain | localhost:3001 |
+| VIRTUAL_HOST | your domain | localhost:3001 |
 | USER_AGENT | user agent use when sending request | |
 | SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD | for sending email | |
 | INTERVAL | delay between each check | 5 minutes | |
@@ -51,11 +51,9 @@ To quickly tryout uptime on your machine with Docker, I have a Docker image that
 
 ```
 sudo docker run \
-  -e DB=./db \
-  -e PORT=6969 \
-  -e DOMAIN=http://localhost:6969 \
-  --volume=/my/own/datadir:/usr/src/app/db:rw \
-  --publish=3000:6969 \
+  --env-file=.env-sample \
+  --volume=`pwd`/db:/usr/src/app/db:rw \
+  --publish=3001:3001 \
   --detach=true \
   --name=uptime \
   quocnguyen/uptime:latest
